@@ -1,0 +1,24 @@
+install {
+    foreach file [glob ./src/*] {
+        set destination ~/.local/bin/[file rootname [file tail $file]]
+        file copy -force $file $destination 
+        file attributes $destination -permissions +x
+    }
+}
+
+lint {
+    foreach file [glob ./src/*] {
+        puts [exec nagelfar $file]
+    }
+}
+
+test {
+    set argv ""
+    set argc 0
+    source ./tests/all.tcl
+}
+
+default {
+    lint
+    test
+}
