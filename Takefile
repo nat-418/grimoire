@@ -8,7 +8,7 @@ install {
 
 lint {
     foreach file [glob ./src/*] {
-        puts [exec nagelfar $file]
+        puts [exec ./bin/nagelfar $file]
     }
 }
 
