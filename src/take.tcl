@@ -16,39 +16,26 @@ proc ifopt {long short script} {
         || [string match "-*$short*" $::argv]} $script
 }
 
-##nagelfar ignore
-ifopt version v {
-    puts stdout $::version
-    exit 0
-}
-
 ifopt help h {
     puts stdout "take v$::version | A simple task-runner\n"
     puts stdout "Usage: take \[options] \[task]\n"
     puts stdout "Options:"
     puts stdout "  -h, --help         Show this help message."
+    puts stdout "  -l, --list         Show available tasks."
     puts stdout "  -v, --version      Show program version."
     puts stdout ""
     exit 0
 }
 
-# Parse Takefile
-# --------------
+ifopt list l {
+    foreach task [dict keys $::takefile_data] {puts $task}
+    exit 0
+}
 
-if {![file exists ./Takefile]} {bail "no Takefile found"}
-
-set opened_takefile [open ./Takefile r]
-set takefile_data [read $opened_takefile]
-close $opened_takefile
-
-proc take {task} {
-    global takefile_data
-
-    try {
-        switch $task $takefile_data
-    } on error {message} {
-        bail $message
-    }
+##nagelfar ignore
+ifopt version v {
+    puts stdout $::version
+    exit 0
 }
 
 # Extend Tcl so that Takefile task names and system commands can be run
