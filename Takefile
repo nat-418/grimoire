@@ -23,6 +23,11 @@ test {
     source ./tests/all.tcl
 }
 
+ci {
+    lint
+    test
+}
+
 default {
     lint
     test
