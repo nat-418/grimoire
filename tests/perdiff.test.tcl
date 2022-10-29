@@ -1,11 +1,30 @@
 package require tcltest
 namespace import ::tcltest::*
+##nagelfar syntax test x*
+##nagelfar syntax loadFile x
+##nagelfar syntax loadTestedCommands
+##nagelfar syntax configure s s
+##nagelfar syntax cleanupTests
 
-set script ../src/perdiff.tcl
+proc tilde {path} {
+    global env
+    return [string map "$env(HOME) ~" $path]
+}
 
-loadFile [file normalize [file join [file dirname [info script]] $script]]
+proc sourceWith {path args} {
+    global argc argv
+    set fullpath [file normalize [file join [file dirname [info script]] $path]]
+    set saved_argv $argv
+    set saved_argc $argc
+    set argv $args
+    set argc [llength $args]
+    puts stdout "INFO: sourcing [tilde $fullpath] with arguments: $args"
+    source $fullpath
+    set argv $saved_argv
+    set argc $saved_argc
+}
 
-loadTestedCommands
+sourceWith ../src/perdiff.tcl 0 0
 
 configure -verbose line
 

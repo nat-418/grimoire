@@ -36,12 +36,15 @@ proc take {task} {
 # --------------------------
 
 proc ifopt {long short script} {
-    if {[string match "*-$long*" $::argv]
-        || [string match "-*$short*" $::argv]} $script
+    global argv 
+    if {[string match "*-$long*"  $argv]} {return $script}
+    if {[string match "-*$short*" $argv]} {return $script}
+    return false
 }
 
 ifopt help h {
-    puts stdout "take v$::version | A simple task-runner\n"
+    global version
+    puts stdout "take v$version | A simple task-runner\n"
     puts stdout "Usage: take \[options] \[task]\n"
     puts stdout "Options:"
     puts stdout "  -h, --help         Show this help message."
@@ -52,13 +55,15 @@ ifopt help h {
 }
 
 ifopt list l {
-    foreach task [dict keys $::takefile_data] {puts $task}
+    global takefile_data
+    foreach task [dict keys $takefile_data] {puts $task}
     exit 0
 }
 
 ##nagelfar ignore
 ifopt version v {
-    puts stdout $::version
+    global version
+    puts stdout $version
     exit 0
 }
 

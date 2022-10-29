@@ -49,16 +49,13 @@ proc calculate {x y} {
     error "calculation failed"
 }
 
-# Stop execution if we are being `source`d.
-if {[info frame] eq 3} {return -code 0}
-
 # Handle user input
 try {
     if {$argv eq ""} {set argv "-help"}
 
-    array set params [::cmdline::getoptions ::argv $options $usage]
+    array set params [::cmdline::getoptions argv $options $usage]
 
-    lassign $::argv old new
+    lassign $argv old new
 
     if {$params(old) ne "n1"} {set old $params(old)}
     if {$params(new) ne "n2"} {set new $params(new)}
