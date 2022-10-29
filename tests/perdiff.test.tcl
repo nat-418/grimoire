@@ -29,7 +29,7 @@ sourceWith ../src/perdiff.tcl 0 0
 configure -verbose line
 
 test input-1 {Bad first argument} -body {
-    calculate a 1
+    calculate 1 1
 } -returnCodes error -result "bad input"
 
 test input-2 {Bad second argument} -body {
