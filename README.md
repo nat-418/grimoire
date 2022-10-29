@@ -32,7 +32,7 @@ nc	1222	11899	killed
 
 take 🥡
 -------
-Take is a task-runner program implemented in Tcl. Tasks are
+A task-runner program implemented in Tcl. Tasks are
 specified in a Takefile using standard Tcl syntax extended
 to support system commands (e.g., `ls`) and running other tasks.
 
