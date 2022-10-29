@@ -1,8 +1,9 @@
 # Grimoire 📖
-![License: 0BSD](https://flat.badgen.net/badge/license/0BSD/blue)
-![Language: Tcl](https://flat.badgen.net/badge/language/Tcl/blue)
-![Latest release](https://flat.badgen.net/github/release/nat-418/grimoire)
-![GitHub checks](https://flat.badgen.net/github/checks/nat-418/grimoire/main)
+![License badge](https://flat.badgen.net/badge/license/0BSD/blue)
+![Language badge](https://flat.badgen.net/badge/language/Tcl/blue)
+![CC badge](https://flat.badgen.net/badge/Conventional%20Commits/1.0.0/blue)
+![Release badge](https://flat.badgen.net/github/release/nat-418/grimoire)
+![Checks badge](https://flat.badgen.net/github/checks/nat-418/grimoire/main)
 
 This is a collection of scripts I have written primarily for
 my own personal use, mostly written in Tcl.
