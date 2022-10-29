@@ -6,7 +6,7 @@
 ![Checks badge](https://flat.badgen.net/github/checks/nat-418/grimoire/main)
 
 This is a collection of scripts I have written primarily for
-my own personal use, mostly written in Tcl.
+my own personal use. Feel free to borrow or improve them.
 
 ## Installing
 - To install the scripts, first run `$ tclsh ./src/take.tcl install`.
