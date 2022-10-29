@@ -4,7 +4,7 @@ namespace import ::tcltest::*
 ##nagelfar syntax runAllTests
 ##nagelfar variable exitCode
 
-proc cleanupTestsHook {} {
+proc tcltest::cleanupTestsHook {} {
     variable numTests
     set ::exitCode [expr {$numTests(Failed) > 0}]
 }
