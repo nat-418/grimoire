@@ -3,9 +3,33 @@ package require Tcl 8.6
 
 set version 0.1.0
 
-proc bail {message} {
+proc bail {message {details ""}} {
     puts stderr "Error: $message."
+    if {$details ne ""} {puts stderr $details}
     exit 1
+}
+
+# Parse Takefile
+# --------------
+
+if {![file exists ./Takefile]} {bail "no Takefile found"}
+
+try {
+    set opened_takefile [open ./Takefile r]
+    set takefile_data [read $opened_takefile]
+    close $opened_takefile
+} on error {message} {
+    bail "failed to read Takefile" $message
+}
+
+proc take {task} {
+    global takefile_data
+
+    try {
+        switch $task $takefile_data
+    } on error {message} {
+        bail $message
+    }
 }
 
 # Parse command-line options
