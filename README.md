@@ -2,7 +2,7 @@
 ![License badge](https://flat.badgen.net/badge/license/0BSD/blue)
 ![Language badge](https://flat.badgen.net/badge/language/Tcl/blue)
 ![CC badge](https://flat.badgen.net/badge/conventional%20commits/1.0.0/blue)
-![Release badge](https://flat.badgen.net/github/release/nat-418/grimoire)
+![Release badge](https://flat.badgen.net/github/release/nat-418/grimoire?branch=main&kill_cache=1)
 ![Checks badge](https://flat.badgen.net/github/checks/nat-418/grimoire/main)
 
 This is a collection of scripts I have written primarily for
@@ -18,6 +18,7 @@ my own personal use. Feel free to borrow or improve them.
 Calculate the percent difference between two numbers.
 
 ### Requirements
+- Tcl v8.6+
 - `tcllib`
 
 ### Example
@@ -30,6 +31,7 @@ $ perdiff 1 2
 Find which processes are hogging what ports, and optionally kill them.
 
 #### Requirements
+- Tcl v8.6+
 - `ss` or `lsof`
 
 #### Example
@@ -49,6 +51,9 @@ nc	1222	11899	killed
 A simple task-runner. Tasks are specified in a Takefile using standard
 Tcl syntax extended to support system commands (e.g., `ls`) and running
 other tasks.
+
+#### Requirements
+- Tcl v8.6+
 
 #### Example
 ```tcl
