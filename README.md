@@ -1,23 +1,36 @@
-Grimoire 📖
-===========
+# Grimoire 📖
+![License: 0BSD](https://flat.badgen.net/badge/license/0BSD/blue)
+![Language: Tcl](https://flat.badgen.net/badge/language/Tcl/blue)
+![Latest release](https://flat.badgen.net/github/release/nat-418/grimoire)
+
 This is a collection of scripts I have written primarily for
 my own personal use, mostly written in Tcl.
 
-To install the scripts, first run `$ tclsh ./src/take.tcl install`.
-To reinstall from there, just run `$ take install`.
-To test them, run `$ take test`.
+## Installing
+- To install the scripts, first run `$ tclsh ./src/take.tcl install`.
+- To reinstall from there, just run `$ take install`.
+- To test them, run `$ take test`.
 
-perdiff 📉
-----------
+## Script index
+## perdiff 📉
 Calculate the percent difference between two numbers.
+
+### Requirements
+- `tcllib`
+
+### Example
 ```bash
 $ perdiff 1 2
 +50%
 ```
 
-porthogs 🐷
------------
+### porthogs 🐷
 Find which processes are hogging what ports, and optionally kill them.
+
+#### Requirements
+- `ss` or `lsof`
+
+#### Example
 ```bash
 $ nc -l -p 1222 &
 [1] 11899
@@ -30,12 +43,12 @@ nc	1222	11899	killed
 [1]+  Killed   nc -l -p 1222
 ```
 
-take 🥡
--------
+### take 🥡
 A simple task-runner. Tasks are specified in a Takefile using standard
 Tcl syntax extended to support system commands (e.g., `ls`) and running
 other tasks.
 
+#### Example
 ```tcl
 install {
     package require fileutil
