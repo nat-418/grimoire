@@ -18,6 +18,7 @@ my own personal use. Feel free to borrow or improve them.
 Calculate the percent difference between two numbers.
 
 ### Requirements
+- Tcl v8.6+
 - `tcllib`
 
 ### Example
@@ -30,6 +31,7 @@ $ perdiff 1 2
 Find which processes are hogging what ports, and optionally kill them.
 
 #### Requirements
+- Tcl v8.6+
 - `ss` or `lsof`
 
 #### Example
@@ -49,6 +51,9 @@ nc	1222	11899	killed
 A simple task-runner. Tasks are specified in a Takefile using standard
 Tcl syntax extended to support system commands (e.g., `ls`) and running
 other tasks.
+
+#### Requirements
+- Tcl v8.6+
 
 #### Example
 ```tcl
