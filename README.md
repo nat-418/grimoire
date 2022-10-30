@@ -1,7 +1,8 @@
 # Grimoire 📖
 ![License badge](https://flat.badgen.net/badge/license/0BSD/blue)
-![Language badge](https://flat.badgen.net/badge/language/Tcl/blue)
+![Semver badge](https://flat.badgen.net/badge/semantic%20versioning/2.0.0/blue)
 ![CC badge](https://flat.badgen.net/badge/conventional%20commits/1.0.0/blue)
+![Language badge](https://flat.badgen.net/badge/language/Tcl/blue)
 ![Release badge](https://flat.badgen.net/github/release/nat-418/grimoire?branch=main&kill_cache=1)
 ![Checks badge](https://flat.badgen.net/github/checks/nat-418/grimoire/main?branch=main&kill_cache=1)
 
