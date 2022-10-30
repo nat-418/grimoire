@@ -24,7 +24,7 @@ Command-line notebook using git. In memoriam
 - git v2.38.0+
 
 ### Examples
-```bash
+```fish
 $ gnb add Always put tar flags in cvzf order or bad things will happen
 [main b660365] Always put tar flags in cvzf order or bad things will happen
 ```
@@ -37,7 +37,7 @@ Calculate the percent difference between two numbers.
 - `tcllib`
 
 ### Example
-```bash
+```fish
 $ perdiff 1 2
 +50%
 ```
