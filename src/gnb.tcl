@@ -56,14 +56,13 @@ proc help {} {
     puts stdout {Usage: [puts stdout] gnb subcommand [arguments]}
     puts stdout {}
     puts stdout {Subcommands:}
-    puts stdout {  add      message?  Create a new note}
-    puts stdout {  edit               Modify old notes}
-    puts stdout {  help               Show this help message}
-    puts stdout {  search   pattern   Find old notes by regex}
-    puts stdout {  sync               Pull and push notes}
-    puts stdout {  version            Show version number}
-    puts stdout {}
-    puts stdout {  All other input is passed through to the git command.}
+    puts stdout {  add     message?    Create a new note}
+    puts stdout {  edit                Modify old notes}
+    puts stdout {  git     [commands]  Perform arbitrary git commands}
+    puts stdout {  help                Show this help message}
+    puts stdout {  search  pattern     Find old notes by regex}
+    puts stdout {  sync                Pull and push notes}
+    puts stdout {  version             Show version number}
     puts stdout {}
     return true
 }
@@ -115,11 +114,15 @@ set arguments  [lrange $argv 1 end]
 switch -glob $subcommand {
     add     {return [add $arguments]}
     edit    {return [interactive git rebase --interactive --root]}
+    git     {return [interactive $subcommand {*}$arguments]}
     search  {return [search $arguments]}
     sync    {return [sync]}
     help    {return [help]}
     version {return [version]}
-    default {return [interactive git $subcommand {*}$arguments]}
+    default {
+        puts stderr "Error: bad input. Try asking for help"
+        exit 1
+    }
 }
 
 puts stderr "Error: failed to process command-line input."
