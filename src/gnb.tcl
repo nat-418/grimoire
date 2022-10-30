@@ -41,7 +41,7 @@ proc interactive {args} {
 
 proc add {args} {
     if {$args eq "{}"} {return [interactive git commit --allow-empty]}
-    puts stdout [exec git commit --allow-empty --message $args]
+    puts stdout [exec git commit --allow-empty --message {*}$args]
     return true
 }
 
