@@ -14,6 +14,32 @@ my own personal use. Feel free to borrow or improve them.
 - To test them, run `$ take test`.
 
 ## Script index
+## gnb 📓
+Command-line interface for a git notebook.
+
+### Requirements
+- Tcl v8.6+
+- git v2.38.0+
+
+### Examples
+```bash
+$ gnb help
+gnb v0.1.0 - Command-line interface for a git notebook
+
+Usage: [puts stdout] gnb subcommand [arguments]
+
+Subcommands:
+  add      message?  Create a new note
+  edit               Modify old notes
+  help               Show this help message
+  search   pattern   Find old notes by regex
+  sync               Pull and push notes
+  version            Show version number
+
+  All other input is passed through to the git command.
+
+```
+
 ## perdiff 📉
 Calculate the percent difference between two numbers.
 
