@@ -138,16 +138,13 @@ if {![file isdirectory $local/.git]} {
     lassign [config] remote username email
     exec git config --local user.name  $username
     exec git config --local user.email $email
-    exec git commit --allow-empty -m "Initial commit"
+    exec git commit --allow-empty -m "📓 gnb v$version root commit"
     if {$remote ne ""} {
         ##nagelfar ignore Found constant
         exec git remote add origin $remote
         exec -ignorestderr git push -u origin main
 
     }
-    puts ""
-    set argv "help"
-    set argc 1
 }
 
 cd $local
