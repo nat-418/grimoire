@@ -9,9 +9,10 @@ This is a collection of scripts I have written primarily for
 my own personal use. Feel free to borrow or improve them.
 
 ## Installing
-- To install the scripts, first run `$ tclsh ./src/take.tcl install`.
+- To install all the scripts, first run `$ tclsh ./src/take.tcl install`.
 - To reinstall from there, just run `$ take install`.
 - To test them, run `$ take test`.
+- To install a single script, call `$ take install ./src/example.tcl`
 
 ## Script index
 ## gnb 📓

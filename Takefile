@@ -1,5 +1,8 @@
 install {
-    foreach file [glob ./src/*] {
+    set arguments [lrange $::argv 1 end]
+    set files [glob ./src/*]
+    if {$arguments ne ""} {set files $arguments} 
+    foreach file $files {
         set destination ~/.local/bin/[file rootname [file tail $file]]
         file copy -force $file $destination 
         file attributes $destination -permissions +x
