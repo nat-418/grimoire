@@ -3,7 +3,7 @@ package require Tcl 8.6
 
 set version 0.1.0
 
-set config_file ~/.config/gnb/config.tcl
+set local ~/.local/share/gnb
 
 proc prompt {message {default {}}} {
     if {$default ne ""} {
@@ -20,32 +20,13 @@ proc prompt {message {default {}}} {
     return $result
 }
 
-if {[file exists $config_file]} {
-    source $config_file
-} else {
-    puts stdout "First-time gnb setup…"
-    set local    [prompt "Path for the local git repository" ~/.local/share/gnb]
-    set remote   [prompt "Remote git URL to sync with"]
-    set username [prompt "Username for git operations"]
-    set email    [prompt "Email for git operations"]
+proc config {} {
+    set username [exec git config --get user.name]
+    set email    [exec git config --get user.email]
 
-    file mkdir [file dirname $config_file]
-    set open_config [open $config_file w]
-    foreach line {
-        {set local    $local}
-        {set remote   $remote}
-        {set username $username}
-        {set email    $email}
-    } {
-        set config_line [string trim [subst -nobackslashes -nocommands $line]]
-        puts $open_config $config_line
-    }
-    close $open_config
-    puts "Wrote configuration to $config_file"
-
-    puts ""
-    set argv "help"
-    set argc 1
+    return [list [prompt "Remote git URL to sync with"]           \
+                 [prompt "Username for git operations" $username] \
+                 [prompt "Email for git operations"    $email]]
 }
 
 proc interactive {args} {
@@ -105,21 +86,26 @@ proc version {} {
 }
 
 if {![file isdirectory $local/.git]} {
+    puts stdout "First-time gnb setup…"
     file mkdir $local
     cd $local
     exec -ignorestderr git init
-    exec git branch -m main
     exec git config --local pull.ff false
     exec git config --local pull.rebase true
+    lassign [config] remote username email
     exec git config --local user.name  $username
     exec git config --local user.email $email
-    ##nagelfar ignore Found constant
-    exec git remote add origin $remote
     exec git commit --allow-empty -m "Initial commit"
-    exec -ignorestderr git push -u origin main
-}
+    if {$remote ne ""} {
+        ##nagelfar ignore Found constant
+        exec git remote add origin $remote
+        exec -ignorestderr git push -u origin main
 
-if {$argc eq 0} {return [help]}
+    }
+    puts ""
+    set argv "help"
+    set argc 1
+}
 
 cd $local
 
