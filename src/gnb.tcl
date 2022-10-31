@@ -11,6 +11,9 @@ set reset \u001b\[0m
 
 set log_format "$green%h$reset %ad\n\n%w(64,4,4)%-s%-b$bold \n%+N$reset"
 
+# Helper functions
+# ----------------
+
 proc prompt {message {default {}}} {
     if {$default ne ""} {
         puts -nonewline stdout "$message? Defaults to $default if blank: " 
@@ -26,15 +29,6 @@ proc prompt {message {default {}}} {
     return $result
 }
 
-proc config {} {
-    set username [exec git config --get user.name]
-    set email    [exec git config --get user.email]
-
-    return [list [prompt "Remote git URL to sync with"]           \
-                 [prompt "Username for git operations" $username] \
-                 [prompt "Email for git operations"    $email]]
-}
-
 proc interactive {args} {
     try {
         puts -nonewline stdout [exec {*}$args <@stdin >@stdout 2>@stderr]
@@ -44,6 +38,9 @@ proc interactive {args} {
         exit 1
     }
 }
+
+# Subcommands
+# -----------
 
 proc add {arguments} {
     if {$arguments eq ""} {return [interactive git commit --allow-empty]}
@@ -158,22 +155,45 @@ proc version {} {
     return true
 }
 
-if {![file isdirectory $local/.git]} {
-    puts stdout "First-time gnb setup…"
-    file mkdir $local
-    cd $local
-    exec -ignorestderr git init
-    exec git config --local pull.ff false
-    exec git config --local pull.rebase true
-    lassign [config] remote username email
-    exec git config --local user.name  $username
-    exec git config --local user.email $email
-    exec git commit --allow-empty -m "📓 gnb v$version root commit"
-    if {$remote ne ""} {
-        ##nagelfar ignore Found constant
-        exec git remote add origin $remote
-        exec -ignorestderr git push -u origin main
+# Command-line interface
+# ----------------------
 
+if {$argv eq ""} {
+    set ::argv help
+    set ::argc 1
+}
+
+if {![file isdirectory $local/.git]} {
+    puts stdout "👉 First-time gnb setup:"
+    try {
+        file mkdir $local
+        cd $local
+        exec -ignorestderr git init
+        exec git config --local pull.ff false
+        exec git config --local pull.rebase true
+
+        set username [exec git config --get user.name]
+        set email    [exec git config --get user.email]
+
+        set remote   [prompt " • Remote git URL to sync with"]
+        set username [prompt " • Username for git operations" $username] 
+        set email    [prompt " • Email for git operations"    $email]
+
+        exec git config --local user.name  $username
+        exec git config --local user.email $email
+        exec git commit --allow-empty -m "📓 gnb v$version root commit"
+
+        if {$remote ne ""} {
+            ##nagelfar ignore Found constant
+            exec -ignorestderr git remote add origin $remote
+            exec -ignorestderr git push -u origin main
+        }
+
+        puts "   First-time setup completed successfully. 👈\n"
+    } on error {error_message} {
+        puts stderr "Error: first-time setup failed."
+        puts stderr $error_message
+        exit 1
     }
 }
 
