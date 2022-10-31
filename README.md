@@ -26,8 +26,10 @@ Command-line notebook using git. In memoriam
 
 ### Examples
 ```fish
-$ gnb add Always put tar flags in cvzf order or bad things will happen
-[main b660365] Always put tar flags in cvzf order or bad things will happen
+$ gnb search root
+b4c09ae 3 minutes ago
+
+    📓 gnb v0.1.0 root commit 
 ```
 
 ## perdiff 📉
