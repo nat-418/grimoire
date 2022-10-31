@@ -1,7 +1,7 @@
 #!/usr/bin/env tclsh
 package require Tcl 8.6
 
-set version 0.1.0
+set version 0.2.0
 
 set local ~/.local/share/gnb
 
