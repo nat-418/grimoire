@@ -108,7 +108,9 @@ proc tag {arguments} {
     try {
         exec git notes add --force --message "$message" $hash
     } on error {error_message} {
-        puts stderr $error_message
+        if {![lsearch $error_message "overwriting existing notes"]} {a
+            puts stderr $error_message
+        }
     }
     return true
 }
@@ -135,8 +137,18 @@ proc last {args} {
 }
 
 proc sync {} {
-    puts stdout [exec git pull]
-    puts stdout [exec git push]
+    try {
+        puts stdout [exec git pull]
+    } on error {error_message} {
+        puts $error_message
+        exit 1
+    }
+    try {
+        puts stdout [exec git push]
+    } on error {error_message} {
+        puts $error_message
+        exit 1
+    }
     return true
 }
 
