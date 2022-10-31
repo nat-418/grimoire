@@ -19,8 +19,8 @@ my own personal use. Feel free to borrow or improve them.
 ## gnb 📓
 A command-line notebook using git. In memoriam
 [hnb](https://hnb.sourceforge.net/). With gnb you can:
-- Quickly add notes without context-switching to some note-taking.
-  application.
+- Quickly add notes without context-switching to some dedicated
+  note-taking application.
 - Find notes by searching for keywords or over a time range.
 - Easily sync notes across machines—it is just another git repository.
 
