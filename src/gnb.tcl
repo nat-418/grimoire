@@ -67,14 +67,15 @@ proc help {} {
     puts stdout {Usage: gnb subcommand [arguments]}
     puts stdout {}
     puts stdout {Subcommands:}
-    puts stdout {  add     message?  Create a new note}
-    puts stdout {  edit              Modify notes}
-    puts stdout {  git     […]       Perform arbitrary git commands}
-    puts stdout {  help              Show this help message}
-    puts stdout {  last    range     Show notes by range, e.g., "1" or "year"}
-    puts stdout {  search  pattern   Show notes matching pattern}
-    puts stdout {  sync              Pull from and push to remote repository}
-    puts stdout {  version           Show version number}
+    puts stdout {  add     message?     Create a new note}
+    puts stdout {  edit                 Modify notes}
+    puts stdout {  git     […]          Perform arbitrary git commands}
+    puts stdout {  help                 Show this help message}
+    puts stdout {  last    range        Show notes by range like "1" or "year"}
+    puts stdout {  search  pattern      Show notes matching pattern}
+    puts stdout {  sync                 Pull from and push to remote repository}
+    puts stdout {  tag     tags [hash]  Set tags for last added note or by hash}
+    puts stdout {  version              Show version number}
     puts stdout {}
     return true
 }
@@ -86,10 +87,17 @@ proc search {args} {
     return true
 }
 
-proc tag {args} {
-    set message [lindex $args 0]
-    set hash    [lindex $args 1]
-    if {$message eq ""} {return false}
+proc tag {arguments} {
+    if {$arguments eq ""} {
+        puts stderr "Error: bad input. Here is some help:\n"
+        help
+        return false
+    }
+    set message [lindex $arguments 0]
+    set hash    [lindex $arguments 1]
+    puts $message
+    puts $hash
+    if {$message eq ""} {set message " "}
     if {$hash    eq ""} {set hash [exec git rev-parse HEAD]}
     try {
         puts stdout [exec git notes add --force --message $message $hash]
@@ -162,10 +170,12 @@ switch -glob $subcommand {
     last    {return [last   $arguments]}
     search  {return [search $arguments]}
     sync    {return [sync]}
+    tag     {return [tag $arguments]}
     help    {return [help]}
     version {return [version]}
     default {
-        puts stderr "Error: bad input. Try asking for help"
+        puts stderr "Error: bad input. Here is some help: \n"
+        help
         exit 1
     }
 }
