@@ -6,11 +6,10 @@ set version 0.1.0
 set local ~/.local/share/gnb
 
 set green \u001b\[32m
+set bold  \u001b\[1m
 set reset \u001b\[0m
 
-append log_format "$green%h$reset by %aN on %aD %N"
-append log_format "\n \n    %s"
-append log_format "\n \n%w(64,4,4)%b"
+set log_format "$green%h$reset %ad\n\n%w(64,4,4)%-s%-b$bold \n%+N$reset"
 
 proc prompt {message {default {}}} {
     if {$default ne ""} {
@@ -40,15 +39,20 @@ proc interactive {args} {
     try {
         puts -nonewline stdout [exec {*}$args <@stdin >@stdout 2>@stderr]
         return true
-    } on error {message} {
-        puts stderr $message
+    } on error {error_message} {
+        puts stderr $error_message
         exit 1
     }
 }
 
-proc add {args} {
-    if {$args eq "{}"} {return [interactive git commit --allow-empty]}
-    puts stdout [exec git commit --allow-empty --message {*}$args]
+proc add {arguments} {
+    if {$arguments eq ""} {return [interactive git commit --allow-empty]}
+    try {
+        exec git commit --allow-empty --message "$arguments"
+    } on error {error_message} {
+        puts $error_message
+        exit 1
+    }
     return true
 }
 
@@ -68,7 +72,7 @@ proc help {} {
     puts stdout {  git     […]          Perform arbitrary git commands}
     puts stdout {  help                 Show this help message}
     puts stdout {  last    range        Show notes by range like "1" or "year"}
-    puts stdout {  search  pattern      Show notes matching pattern}
+    puts stdout {  search  keywords     Show notes matching keywords}
     puts stdout {  sync                 Pull from and push to remote repository}
     puts stdout {  tag     tags [hash]  Set tags for last added note or by hash}
     puts stdout {  version              Show version number}
@@ -76,10 +80,18 @@ proc help {} {
     return true
 }
 
-proc search {args} {
+proc search {arguments} {
     global log_format
-    set args [string map {{ } {\ }} {*}$args]
-    puts [exec git log --regexp-ignore-case --grep=$args --pretty=$log_format]
+    if {$arguments eq ""} {
+        puts stderr "Error: bad input. Here is some help:\n"
+        help
+        return false
+    }
+    set flags {--regexp-ignore-case --notes --date=relative}
+    foreach argument [split $arguments " "] {
+        append flags " " --grep=$argument
+    }
+    puts [exec git log {*}$flags --pretty=$log_format]
     return true
 }
 
@@ -91,26 +103,25 @@ proc tag {arguments} {
     }
     set message [lindex $arguments 0]
     set hash    [lindex $arguments 1]
-    puts $message
-    puts $hash
     if {$message eq ""} {set message " "}
     if {$hash    eq ""} {set hash [exec git rev-parse HEAD]}
     try {
-        puts stdout [exec git notes add --force --message $message $hash]
-    } on error {message} {
-        puts stderr $message
+        exec git notes add --force --message "$message" $hash
+    } on error {error_message} {
+        puts stderr $error_message
     }
     return true
 }
 
 proc last {args} {
     global log_format
+    set flags {--notes --date=short}
     if {[concat {*}$args] eq ""} {
-        puts [exec git log -n 1 --pretty=$log_format]
+        puts [exec git log -n 1 {*}$flags --pretty=$log_format]
         return true
     }
     if {[string is integer $args]} {
-        puts [exec git log -n $args --pretty=$log_format]
+        puts [exec git log -n $args {*}$flags --pretty=$log_format]
         return true
     }
     switch $args {
@@ -119,7 +130,7 @@ proc last {args} {
         month {set args "one month"}
         year  {set args "one year"}
     }
-    puts [exec git log --since=$args --pretty=$log_format]
+    puts [exec git log --since=$args {*}$flags --pretty=$log_format]
     return true
 }
 
