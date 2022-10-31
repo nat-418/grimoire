@@ -5,16 +5,12 @@ set version 0.1.0
 
 set local ~/.local/share/gnb
 
-lappend log_format {---}
-lappend log_format {id:     %h}
-lappend log_format {author: %aN}
-lappend log_format {date:   %aD}
-lappend log_format {title:  %s}
-lappend log_format {tags:   %N}
-lappend log_format {---}
-lappend log_format {%b}
-lappend log_format { }
-set log_format [join $log_format \n]
+set green \u001b\[32m
+set reset \u001b\[0m
+
+append log_format "$green%h$reset by %aN on %aD %N"
+append log_format "\n \n    %s"
+append log_format "\n \n%w(64,4,4)%b"
 
 proc prompt {message {default {}}} {
     if {$default ne ""} {
