@@ -5,36 +5,16 @@ set version 0.1.0
 
 set local ~/.local/share/gnb
 
-proc parseGitLog {args} {
-    set raw [exec git log {*}$args --pretty={%h}\ {%s}\ {%b}\ {%aN}\ {%aE}\ {%aD}]
-    set results {}
-    foreach line [split $raw \n] {
-        set result {}
-        dict set result hash    [lindex $line 0]
-        dict set result subject [lindex $line 1]
-        dict set result body    [lindex $line 2]
-        dict set result name    [lindex $line 3]
-        dict set result email   [lindex $line 4]
-        dict set result date    [lindex $line 5]
-        lappend results $result
-    }
-    return $results
-}
-
-proc prettyGitLog {logs_list}  {
-    foreach log_dict $logs_list {
-        dict with log_dict {
-            ##nagelfar ignore Unknown variable
-            puts stdout "$hash $subject"
-            ##nagelfar ignore Unknown variable
-            if {$body ne ""} {
-                ##nagelfar ignore Unknown variable
-                puts stdout $body
-            }
-        }
-    }
-    return true
-}
+lappend log_format {---}
+lappend log_format {id:     %h}
+lappend log_format {author: %aN}
+lappend log_format {date:   %aD}
+lappend log_format {title:  %s}
+lappend log_format {tags:   %N}
+lappend log_format {---}
+lappend log_format {%b}
+lappend log_format { }
+set log_format [join $log_format \n]
 
 proc prompt {message {default {}}} {
     if {$default ne ""} {
@@ -100,12 +80,34 @@ proc help {} {
 }
 
 proc search {args} {
-    return [prettyGitLog [parseGitLog --regexp-ignore-case --grep=$args]]
+    global log_format
+    set args [string map {{ } {\ }} {*}$args]
+    puts [exec git log --regexp-ignore-case --grep=$args --pretty=$log_format]
+    return true
+}
+
+proc tag {args} {
+    set message [lindex $args 0]
+    set hash    [lindex $args 1]
+    if {$message eq ""} {return false}
+    if {$hash    eq ""} {set hash [exec git rev-parse HEAD]}
+    try {
+        puts stdout [exec git notes add --force --message $message $hash]
+    } on error {message} {
+        puts stderr $message
+    }
+    return true
 }
 
 proc last {args} {
+    global log_format
+    if {[concat {*}$args] eq ""} {
+        puts [exec git log -n 1 --pretty=$log_format]
+        return true
+    }
     if {[string is integer $args]} {
-        return [prettyGitLog [parseGitLog --regexp-ignore-case -n $args]]
+        puts [exec git log -n $args --pretty=$log_format]
+        return true
     }
     switch $args {
         day   {set args "one day"}
@@ -113,7 +115,8 @@ proc last {args} {
         month {set args "one month"}
         year  {set args "one year"}
     }
-    return [prettyGitLog [parseGitLog --regexp-ignore-case --since=$args]]
+    puts [exec git log --since=$args --pretty=$log_format]
+    return true
 }
 
 proc sync {} {
