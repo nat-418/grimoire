@@ -48,7 +48,7 @@
 * **gnb:** fix log formatting ([b9bec44](https://github.com/nat-418/grimoire/commit/b9bec44f5b7581938c54938156460466421cff24))
 * revert bad nagelfar config ([45597f4](https://github.com/nat-418/grimoire/commit/45597f45fb9623e300e1a55fb4121c2f0f4f5759))
 
-## 1.0.0 (2022-10-29)
+## 0.1.0 (2022-10-29)
 
 
 ### Features
