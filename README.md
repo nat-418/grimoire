@@ -17,7 +17,7 @@ my own personal use. Feel free to borrow or improve them.
 
 ## Script index
 ## dotctl 🎛️
-A git wrapper to manage configuration files in a bare repository
+A git wrapper to manage configuration files in a bare repository.
 
 ### Requirements
 - Tcl v8.6+
