@@ -16,20 +16,20 @@ my own personal use. Feel free to borrow or improve them.
 - To install a single script, call `$ take install ./src/example.tcl`
 
 ## Script index
-## dotctl 🎛️
+### dotctl 🎛️
 A git wrapper to manage configuration files in a bare repository.
 
-### Requirements
+#### Requirements
 - Tcl v8.6+
 - git v2.38.0+
 
-### Example
+#### Example
 ```fish
 $ dotctl status
 On branch main
 nothing to commit (use -u to show untracked files)
 ```
-## gnb 📓
+### gnb 📓
 A command-line notebook using git. In memoriam
 [hnb](https://hnb.sourceforge.net/). With gnb you can:
 - Quickly add notes without context-switching to some dedicated
@@ -37,11 +37,11 @@ A command-line notebook using git. In memoriam
 - Find notes by searching for keywords or over a time range.
 - Easily sync notes across machines—it is just another git repository.
 
-### Requirements
+#### Requirements
 - Tcl v8.6+
 - git v2.38.0+
 
-### Examples
+#### Examples
 ```fish
 $ gnb search root
 b4c09ae 3 minutes ago
@@ -49,14 +49,14 @@ b4c09ae 3 minutes ago
     📓 gnb v0.1.0 root commit 
 ```
 
-## perdiff 📉
+### perdiff 📉
 Calculate the percent difference between two numbers.
 
-### Requirements
+#### Requirements
 - Tcl v8.6+
 - `tcllib`
 
-### Example
+#### Example
 ```fish
 $ perdiff 1 2
 +50%
