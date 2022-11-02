@@ -81,7 +81,7 @@ proc cli {argv} {
     }
 
     if {$arg in "help --help -help -h"} {
-      lappend help "🐷 porthogs v$version — Find port-hogging processes."
+      lappend help "porthogs v$version - Find port-hogging processes."
       lappend help {}
       lappend help {Usage:}
       lappend help {  $ porthogs [options] [ports...]}
@@ -137,6 +137,10 @@ proc cli {argv} {
   return [join $output "\n"]
 }
 
-# Do nothing without user input.
-if {$argc ne 0} {puts [cli $argv]}
+if {$argc eq 0} {
+    set argv help
+    set argc 1
+}
+
+puts [cli $argv]
 

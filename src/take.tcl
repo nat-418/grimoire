@@ -9,6 +9,23 @@ proc bail {message {details ""}} {
     exit 1
 }
 
+if {[lsearch -glob $argv -*h.*]} {
+    puts "take v$version - A simple task-runner.\n"
+    puts "Usage: take \[options] task\n"
+    puts "Options:"
+    puts "  -h, --help     Show this help message"
+    puts "  -v, --version  Return the current version number\n"
+    puts "Note: take looks for a Takefile in the current directory."
+    puts "this file must be valid Tcl and implement the body of"
+    puts "a switch statement. Task definitions can call arbitrary shell"
+    puts "commands. Here is an example:\n"
+    puts {$ echo 'greet {puts "Hello, world!"}' > Takefile}
+    puts {$ echo 'count {wc -l ./Takefile}' >> Takefile}
+    puts {$ take greet}
+    puts {Hello, world!}
+    exit
+}
+
 # Parse Takefile
 # --------------
 

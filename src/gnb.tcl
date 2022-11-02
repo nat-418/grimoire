@@ -73,7 +73,6 @@ proc help {} {
     puts stdout {  sync                 Pull from and push to remote repository}
     puts stdout {  tag     tags [hash]  Set tags for last added note or by hash}
     puts stdout {  version              Show version number}
-    puts stdout {}
     return true
 }
 

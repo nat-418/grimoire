@@ -62,7 +62,7 @@ try {
 
     puts stdout [calculate $old $new]
 } trap {CMDLINE} {msg o} {
-   puts stderr $msg
+   puts -nonewline stderr $msg
    exit 1
 } on error {msg o} {
    puts stderr "Error: $msg."

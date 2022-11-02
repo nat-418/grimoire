@@ -40,6 +40,18 @@ proc clone {path url} {
     }
 }
 
+proc help {} {
+    global version
+    puts "dotctl v$version - Manage dotfiles in a git bare repository.\n"
+    puts {Usage: dotctl options [git commands]}
+    puts {}
+    puts {Options:}
+    puts {  -help      Show this help message}
+    puts {  -ls        Show what files are tracked in the repository}
+    puts {  -path      Return the path to the repository}
+    exit 0
+}
+
 if {![file isdirectory $local/hooks]} {
     try {
         puts stdout "No local repository found at $local."
@@ -63,17 +75,7 @@ if {![file isdirectory $local/hooks]} {
 }
 
 switch [lindex $argv 0] {
-    -help {
-        puts "dotctl v$version - Manage dotfiles in a git bare repository.\n"
-        puts {Usage: dotctl options [git commands]}
-        puts {}
-        puts {Options:}
-        puts {  -help      Show this help message}
-        puts {  -ls        Show what files are tracked in the repository}
-        puts {  -path      Return the path to the repository}
-        puts {}
-        exit 0
-    }
+    -help {return [help]}
     -ls {
         set dirs [exec {*}$git_prefix ls-tree --full-tree -r --name-only HEAD]
         foreach dir $dirs {puts ~/$dir}
@@ -83,7 +85,7 @@ switch [lindex $argv 0] {
         puts $local
         exit 0
     }
-    {} {exit 0}
+    {} {return [help]}
     default {
         try {
             set results [exec {*}$git_prefix {*}$argv]
