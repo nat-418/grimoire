@@ -6,10 +6,15 @@ This is a collection of scripts I have written primarily for
 my own personal use. Feel free to borrow or improve them.
 
 ## Installing
-- To install all the scripts, first run `$ tclsh ./src/take.tcl install`.
-- To reinstall from there, just run `$ take install`.
-- To test them, run `$ take test`.
-- To install a single script, call `$ take install ./src/example.tcl`
+## With Nix
+Test the scripts out in `$ nix-shell` and install with
+`$ nix-env -if default.nix`.
+
+## Without Nix
+1. To install all the scripts, first run `$ tclsh ./src/take.tcl install`.
+2. To reinstall from there, just run `$ take install`.
+3. To test them, run `$ take test`.
+4. To install a single script, call `$ take install ./src/example.tcl`
 
 ## Script index
 ### dotctl 🎛️

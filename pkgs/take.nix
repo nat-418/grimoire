@@ -6,7 +6,7 @@ tcl.mkTclDerivation rec {
 
   src = fetchurl {
     url    = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/take.tcl";
-    sha256 = "sha256-7+sno+61usprxMtP9J8AvjIkB+tmUCqSka+VGbfOivs=";
+    sha256 = "sha256-YAA1rsII5XnwwCg9KFCbhyUYe31odDGZgEu6H3SQBF8=";
   };
 
   buildInputs = [
