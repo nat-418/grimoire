@@ -2,9 +2,6 @@
 ![License badge](https://flat.badgen.net/badge/license/0BSD/blue)
 ![Semver badge](https://flat.badgen.net/badge/semantic%20versioning/2.0.0/blue)
 ![CC badge](https://flat.badgen.net/badge/conventional%20commits/1.0.0/blue)
-![Language badge](https://flat.badgen.net/badge/language/Tcl/blue)
-![Release badge](https://flat.badgen.net/github/release/nat-418/grimoire?branch=main&kill_cache=1)
-![Checks badge](https://flat.badgen.net/github/checks/nat-418/grimoire/main?branch=main&kill_cache=1)
 
 This is a collection of scripts I have written primarily for
 my own personal use. Feel free to borrow or improve them.
