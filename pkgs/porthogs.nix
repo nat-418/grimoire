@@ -1,13 +1,10 @@
-{ lib, stdenv, fetchurl, tcl, tcllib, runtimeShell }:
+{ lib, stdenv, tcl, tcllib, runtimeShell }:
 
 tcl.mkTclDerivation rec {
   pname   = "porthogs";
   version = "0.2.0";
 
-  src = fetchurl {
-    url    = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/porthogs.tcl";
-    sha256 = "sha256-+hjWFKm0KBy7qNVAjxTnLIBDlI0nYjFzvswqaZr09xI=";
-  };
+  src = ../src/porthogs.tcl;
 
   buildInputs = [
     tcl

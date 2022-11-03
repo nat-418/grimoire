@@ -1,13 +1,10 @@
-{ lib, stdenv, fetchurl, tcl, tcllib, runtimeShell }:
+{ lib, stdenv, tcl, tcllib, runtimeShell }:
 
 tcl.mkTclDerivation rec {
   pname   = "take";
   version = "0.1.1";
 
-  src = fetchurl {
-    url    = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/take.tcl";
-    sha256 = "sha256-YAA1rsII5XnwwCg9KFCbhyUYe31odDGZgEu6H3SQBF8=";
-  };
+  src = ../src/take.tcl;
 
   buildInputs = [
     tcl

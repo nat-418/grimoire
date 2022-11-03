@@ -1,13 +1,10 @@
-{ lib, stdenv, fetchurl, tcl, tcllib, runtimeShell }:
+{ lib, stdenv, tcl, tcllib, runtimeShell }:
 
 tcl.mkTclDerivation rec {
   pname   = "dotctl";
   version = "0.1.0";
 
-  src = fetchurl {
-    url    = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/dotctl.tcl";
-    sha256 = "sha256-ezf6wU4wjau5VcP48tvoM+P2lKcXMolhwnjyr90LFaw=";
-  };
+  src = ../src/dotctl.tcl;
 
   buildInputs = [
     tcl

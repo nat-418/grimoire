@@ -1,13 +1,10 @@
-{ lib, stdenv, fetchurl, tcl, tcllib, runtimeShell }:
+{ lib, stdenv, tcl, tcllib, runtimeShell }:
 
 tcl.mkTclDerivation rec {
   pname   = "perdiff";
   version = "0.1.0";
 
-  src = fetchurl {
-    url    = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/perdiff.tcl";
-    sha256 = "sha256-hFfT7E6d5Qx5qrowGcE8owYmkSXg02D5txV8q06DiWo=";
-  };
+  src = ../src/perdiff.tcl;
 
   buildInputs = [
     tcl
