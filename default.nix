@@ -1,12 +1,21 @@
-with import <nixpkgs> {};
+{ pkgs ? import <nixpkgs> {}
+, grimoire ? (
+  with pkgs;
 
-stdenv.mkDerivation {
-  name = "grimoire";
+  let
+    packages = rec {
+      gnb = callPackage ./pkgs/gnb.nix {};
+
+      inherit pkgs;
+    };
+  in
+    packages
+)}:
+
+grimoire.pkgs.mkShell rec {
   buildInputs = [
-    git
-    lsof
-    tcl
-    tcllib
+    pkgs.tcl
+    pkgs.tcllib
+    grimoire.gnb
   ];
 }
-

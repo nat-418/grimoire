@@ -21,9 +21,23 @@ test {
     source ./tests/all.tcl
 }
 
+build-packages {
+    try {
+        [exec which xnix-build]
+    } on error _ {
+        puts stderr "Warning: nix-build not available, skipping."
+        return false
+    }
+    set files [glob ./pkgs/*]
+    foreach file $files {
+        nix-build -E [subst {with import <nixpkgs> {}; callPackage $file {}}]
+    }
+}
+
 ci {
     lint
     test
+    build-packages
 }
 
 default {
