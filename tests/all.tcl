@@ -14,4 +14,4 @@ configure -file    *.test.tcl
 
 runAllTests
 
-exit $::exitCode
+return -code $::exitCode
