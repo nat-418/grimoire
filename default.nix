@@ -1,21 +1,12 @@
-{ pkgs ? import <nixpkgs> {}
-, grimoire ? (
-  with pkgs;
+{ system ? builtins.currentSystem }:
 
-  let
-    packages = rec {
-      gnb = callPackage ./pkgs/gnb.nix {};
-
-      inherit pkgs;
-    };
-  in
-    packages
-)}:
-
-grimoire.pkgs.mkShell rec {
-  buildInputs = [
-    pkgs.tcl
-    pkgs.tcllib
-    grimoire.gnb
-  ];
-}
+let
+  pkgs = import <nixpkgs> { inherit system; };
+  callPackage = pkgs.lib.callPackageWith (pkgs // grimoire);
+  grimoire = {
+    dotctl   = pkgs.callPackage ./pkgs/dotctl.nix   {};
+    gnb      = pkgs.callPackage ./pkgs/gnb.nix      {};
+    perdiff  = pkgs.callPackage ./pkgs/perdiff.nix  {};
+    porthogs = pkgs.callPackage ./pkgs/porthogs.nix {};
+    take     = pkgs.callPackage ./pkgs/take.nix     {};
+  }; in grimoire

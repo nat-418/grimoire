@@ -22,15 +22,8 @@ test {
 }
 
 build-packages {
-    try {
-        exec which nix-build
-    } on error _ {
-        puts stderr "Warning: nix-build not available, skipping."
-        return false
-    }
-    set files [glob ./pkgs/*]
-    foreach file $files {
-        nix-build -E [subst {with import <nixpkgs> {}; callPackage $file {}}]
+    if {[catch which nix-build]} {
+        nix-build --no-out-link
     }
 }
 

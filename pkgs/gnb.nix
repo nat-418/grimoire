@@ -29,6 +29,5 @@ tcl.mkTclDerivation rec {
     mainProgram = "gnb";
     license     = licenses.bsd0;
     platforms   = platforms.all;
-    maintainers = [ maintainers.nat-418 ];
   };
 }

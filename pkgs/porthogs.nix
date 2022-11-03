@@ -29,6 +29,5 @@ tcl.mkTclDerivation rec {
     mainProgram = "porthogs";
     license     = licenses.bsd0;
     platforms   = platforms.all;
-    maintainers = [ maintainers.nat-418 ];
   };
 }

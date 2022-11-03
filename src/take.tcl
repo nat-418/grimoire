@@ -1,29 +1,12 @@
 #!/usr/bin/env tclsh
 package require Tcl 8.6
 
-set version 0.1.0
+set version 0.1.1
 
 proc bail {message {details ""}} {
     puts stderr "Error: $message."
     if {$details ne ""} {puts stderr $details}
     exit 1
-}
-
-if {[lsearch -glob $argv -*h.*]} {
-    puts "take v$version - A simple task-runner.\n"
-    puts "Usage: take \[options] task\n"
-    puts "Options:"
-    puts "  -h, --help     Show this help message"
-    puts "  -v, --version  Return the current version number\n"
-    puts "Note: take looks for a Takefile in the current directory."
-    puts "this file must be valid Tcl and implement the body of"
-    puts "a switch statement. Task definitions can call arbitrary shell"
-    puts "commands. Here is an example:\n"
-    puts {$ echo 'greet {puts "Hello, world!"}' > Takefile}
-    puts {$ echo 'count {wc -l ./Takefile}' >> Takefile}
-    puts {$ take greet}
-    puts {Hello, world!}
-    exit
 }
 
 # Parse Takefile
@@ -54,8 +37,8 @@ proc take {task} {
 
 proc ifopt {long short script} {
     global argv 
-    if {[string match "*-$long*"  $argv]} {return $script}
-    if {[string match "-*$short*" $argv]} {return $script}
+    if {[regexp ".*--$long.*"  $argv]} {eval $script}
+    if {[regexp ".*-$short.*" $argv]}  {eval $script}
     return false
 }
 
@@ -101,4 +84,4 @@ proc unknown args {
     }
 }
 
-take [lindex $argv 0]
+take $argv

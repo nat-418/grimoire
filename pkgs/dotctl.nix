@@ -29,6 +29,5 @@ tcl.mkTclDerivation rec {
     mainProgram = "dotctl";
     license     = licenses.bsd0;
     platforms   = platforms.all;
-    maintainers = [ maintainers.nat-418 ];
   };
 }

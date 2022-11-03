@@ -104,7 +104,7 @@ proc tag {arguments} {
     try {
         exec git notes add --force --message "$message" $hash
     } on error {error_message} {
-        if {![lsearch $error_message "overwriting existing notes"]} {a
+        if {![lsearch $error_message "overwriting existing notes"]} {
             puts stderr $error_message
         }
     }

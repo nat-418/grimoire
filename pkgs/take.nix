@@ -2,7 +2,7 @@
 
 tcl.mkTclDerivation rec {
   pname   = "take";
-  version = "0.1.0";
+  version = "0.1.1";
 
   src = fetchurl {
     url    = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/take.tcl";
@@ -29,6 +29,5 @@ tcl.mkTclDerivation rec {
     mainProgram = "take";
     license     = licenses.bsd0;
     platforms   = platforms.all;
-    maintainers = [ maintainers.nat-418 ];
   };
 }
