@@ -23,7 +23,7 @@ test {
 
 build-packages {
     try {
-        [exec which xnix-build]
+        exec which nix-build
     } on error _ {
         puts stderr "Warning: nix-build not available, skipping."
         return false
