@@ -1,15 +1,10 @@
-{ lib, stdenv, tcl, tcllib, runtimeShell }:
+{ lib, tcl }:
 
 tcl.mkTclDerivation rec {
   pname   = "porthogs";
   version = "0.2.0";
 
   src = ../src/porthogs.tcl;
-
-  buildInputs = [
-    tcl
-    tcllib
-  ];
 
   dontUnpack    = true;
   dontBuild     = true;

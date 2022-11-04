@@ -1,15 +1,10 @@
-{ lib, stdenv, tcl, tcllib, runtimeShell }:
+{ lib, tcl }:
 
 tcl.mkTclDerivation rec {
   pname   = "dotctl";
   version = "0.1.0";
 
   src = ../src/dotctl.tcl;
-
-  buildInputs = [
-    tcl
-    tcllib
-  ];
 
   dontUnpack    = true;
   dontBuild     = true;

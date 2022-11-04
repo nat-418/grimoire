@@ -3,8 +3,6 @@
 pkgs.mkShell {
   buildInputs = [
     pkgs.git
-    pkgs.tcl
-    pkgs.tcllib
     grimoire.dotctl
     grimoire.gnb
     grimoire.perdiff

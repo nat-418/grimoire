@@ -1,15 +1,10 @@
-{ lib, stdenv, tcl, tcllib, runtimeShell }:
+{ lib, tcl }:
 
 tcl.mkTclDerivation rec {
   pname   = "take";
   version = "0.1.1";
 
   src = ../src/take.tcl;
-
-  buildInputs = [
-    tcl
-    tcllib
-  ];
 
   dontUnpack    = true;
   dontBuild     = true;

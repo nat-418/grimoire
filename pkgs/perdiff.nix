@@ -1,4 +1,4 @@
-{ lib, stdenv, tcl, tcllib, runtimeShell }:
+{ lib, tcl, tcllib }:
 
 tcl.mkTclDerivation rec {
   pname   = "perdiff";
@@ -7,7 +7,6 @@ tcl.mkTclDerivation rec {
   src = ../src/perdiff.tcl;
 
   buildInputs = [
-    tcl
     tcllib
   ];
 
