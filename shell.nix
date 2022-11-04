@@ -1,12 +1,14 @@
-{ pkgs ? import <nixpkgs> {}, grimoire ? import ./default.nix {} }:
+{ grimoire ? import ./default.nix {} }:
 
-pkgs.mkShell {
+with grimoire;
+
+nixpkgs.mkShell {
   buildInputs = [
-    pkgs.git
-    grimoire.dotctl
     grimoire.gnb
+    grimoire.dotctl
     grimoire.perdiff
     grimoire.porthogs
     grimoire.take
+    nixpkgs.git
   ];
 }

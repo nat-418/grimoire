@@ -1,6 +1,6 @@
 { lib, tcl, tcllib }:
 
-tcl.mkTclDerivation rec {
+tcl.mkTclDerivation {
   pname   = "perdiff";
   version = "0.1.0";
 

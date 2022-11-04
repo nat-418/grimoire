@@ -1,13 +1,15 @@
 { system ? builtins.currentSystem }:
 
 let
-  pkgs = import <nixpkgs> { inherit system; };
+  nixpkgs = import <nixpkgs> { inherit system; };
   grimoire = {
-    dotctl   = pkgs.callPackage ./pkgs/dotctl.nix   {};
-    gnb      = pkgs.callPackage ./pkgs/gnb.nix      {};
-    perdiff  = pkgs.callPackage ./pkgs/perdiff.nix  {};
-    porthogs = pkgs.callPackage ./pkgs/porthogs.nix {};
-    take     = pkgs.callPackage ./pkgs/take.nix     {};
+    dotctl   = nixpkgs.callPackage ./pkgs/dotctl.nix   {};
+    gnb      = nixpkgs.callPackage ./pkgs/gnb.nix      {};
+    perdiff  = nixpkgs.callPackage ./pkgs/perdiff.nix  {};
+    porthogs = nixpkgs.callPackage ./pkgs/porthogs.nix {};
+    take     = nixpkgs.callPackage ./pkgs/take.nix     {};
+    
+    inherit nixpkgs;
   };
 in
-  grimoire 
+  grimoire

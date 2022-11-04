@@ -1,6 +1,6 @@
 { lib, tcl }:
 
-tcl.mkTclDerivation rec {
+tcl.mkTclDerivation {
   pname   = "porthogs";
   version = "0.2.0";
 

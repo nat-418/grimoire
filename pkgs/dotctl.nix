@@ -1,6 +1,6 @@
 { lib, tcl }:
 
-tcl.mkTclDerivation rec {
+tcl.mkTclDerivation {
   pname   = "dotctl";
   version = "0.1.0";
 

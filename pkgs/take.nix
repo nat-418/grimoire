@@ -1,6 +1,6 @@
 { lib, tcl }:
 
-tcl.mkTclDerivation rec {
+tcl.mkTclDerivation {
   pname   = "take";
   version = "0.1.1";
 
