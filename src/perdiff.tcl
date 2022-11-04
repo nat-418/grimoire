@@ -4,10 +4,9 @@ namespace import ::tcl::mathop::*
 
 set version 0.1.0
 
-set usage [string trim "
-v$version - Calculate the percent difference between two numbers.
+set usage [string trim "perdiff v$version - Calculate the percent difference between two numbers.
 
-Usage: \$ perdiff \[options] \[n1 n2]
+Usage: perdiff \[options] \[n1 n2]
 
 Options:
 "]
@@ -60,7 +59,7 @@ try {
     if {$params(old) ne "n1"} {set old $params(old)}
     if {$params(new) ne "n2"} {set new $params(new)}
 
-    puts stdout [calculate $old $new]
+    puts -nonewline stdout [calculate $old $new]
 } trap {CMDLINE} {msg o} {
    puts -nonewline stderr $msg
    exit 1
