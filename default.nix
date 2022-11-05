@@ -2,14 +2,13 @@
 
 let
   nixpkgs = import <nixpkgs> { inherit system; };
+  source = path: nixpkgs.callPackage path {};
   grimoire = {
-    dotctl   = nixpkgs.callPackage ./pkgs/dotctl.nix   {};
-    gnb      = nixpkgs.callPackage ./pkgs/gnb.nix      {};
-    perdiff  = nixpkgs.callPackage ./pkgs/perdiff.nix  {};
-    porthogs = nixpkgs.callPackage ./pkgs/porthogs.nix {};
-    take     = nixpkgs.callPackage ./pkgs/take.nix     {};
-    
-    inherit nixpkgs;
+    dotctl   = source ./pkgs/dotctl.nix;
+    gnb      = source ./pkgs/gnb.nix;
+    perdiff  = source ./pkgs/perdiff.nix;
+    porthogs = source ./pkgs/porthogs.nix;
+    take     = source ./pkgs/take.nix;
   };
 in
   grimoire

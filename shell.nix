@@ -1,6 +1,4 @@
-{ grimoire ? import ./default.nix {} }:
-
-with grimoire;
+{ nixpkgs ? import <nixpkgs> {}, grimoire ? import ./default.nix {} }:
 
 nixpkgs.mkShell {
   buildInputs = [
