@@ -1,10 +1,10 @@
-{ lib, tcl }:
+{ lib, fetchurl, tcl }:
 
 tcl.mkTclDerivation {
   pname   = "porthogs";
   version = "0.2.0";
 
-  src = ../src/porthogs.tcl;
+  src = fetchurl "https://raw.githubusercontent.com/nat-418/grimoire/main/src/porthogs.tcl";
 
   dontUnpack    = true;
   dontBuild     = true;

@@ -1,10 +1,10 @@
-{ lib, tcl }:
+{ lib, fetchurl, tcl }:
 
 tcl.mkTclDerivation {
   pname   = "take";
   version = "0.1.1";
 
-  src = ../src/take.tcl;
+  src = fetchurl "https://raw.githubusercontent.com/nat-418/grimoire/main/src/fetchurl.tcl";
 
   dontUnpack    = true;
   dontBuild     = true;

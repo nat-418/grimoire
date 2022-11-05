@@ -1,10 +1,10 @@
-{ lib, tcl }:
+{ lib, fetchurl, tcl }:
 
 tcl.mkTclDerivation {
   pname   = "dotctl";
   version = "0.1.0";
 
-  src = ../src/dotctl.tcl;
+  src = fetchurl "https://raw.githubusercontent.com/nat-418/grimoire/main/src/dotctl.tcl";
 
   dontUnpack    = true;
   dontBuild     = true;

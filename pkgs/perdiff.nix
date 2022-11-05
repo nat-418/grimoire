@@ -1,10 +1,10 @@
-{ lib, tcl, tcllib }:
+{ lib, fetchurl, tcl, tcllib }:
 
 tcl.mkTclDerivation {
   pname   = "perdiff";
   version = "0.1.0";
 
-  src = ../src/perdiff.tcl;
+  src = fetchurl "https://raw.githubusercontent.com/nat-418/grimoire/main/src/perdiff.tcl";
 
   buildInputs = [
     tcllib
