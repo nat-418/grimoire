@@ -31,21 +31,40 @@
             '';
           };
       in rec {
+        packages.dotctl = (tclScript {
+          name        = "dotctl";
+          version     = "0.1.0";
+          description = "A git wrapper for managing dotfiles in a bare repository";
+          url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/dotctl.tcl";
+          sha256      = "sha256-ezf6wU4wjau5VcP48tvoM+P2lKcXMolhwnjyr90LFaw=";
+          deps        = [ pkgs.git ];
+        });
         packages.gnb = (tclScript {
           name        = "gnb";
           version     = "0.2.0";
-          description = "A command-line git-powered notebook";
+          description = "A command-line, git-powered notebook";
           url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/gnb.tcl";
           sha256      = "6957bad55a73645297d1b5032ed8638c3f8641648d5efd47afccd9664834c8aa";
           deps        = [ pkgs.git ];
         });
+        packages.take = (tclScript {
+          name        = "take";
+          version     = "0.1.1";
+          description = "A simple task-runner";
+          url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/take.tcl";
+          sha256      = "sha256-YAA1rsII5XnwwCg9KFCbhyUYe31odDGZgEu6H3SQBF8=";
+          deps        = [];
+        });
         packages.default = packages.gnb;
 
-        apps.gnb = flake-utils.lib.mkApp { drv = packages.gnb; };
+        apps.gnb    = flake-utils.lib.mkApp { drv = packages.dotctl; };
+        apps.dotctl = flake-utils.lib.mkApp { drv = packages.gnb; };
 
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.git
+            pkgs.tcl
+            pkgs.tcllib
           ];
         };
       }
