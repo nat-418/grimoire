@@ -13,7 +13,7 @@
           pkgs.stdenv.mkDerivation {
             pname       = name;
             version     = version;
-            description = description;
+            meta.description = description;
 
             src = pkgs.fetchurl {
               url    = url;
@@ -72,10 +72,9 @@
           sha256      = "sha256-YAA1rsII5XnwwCg9KFCbhyUYe31odDGZgEu6H3SQBF8=";
           deps        = [];
         });
-        packages.default = packages.gnb;
 
-        apps.gnb      = flake-utils.lib.mkApp { drv = packages.gnb; };
         apps.dotctl   = flake-utils.lib.mkApp { drv = packages.dotctl; };
+        apps.gnb      = flake-utils.lib.mkApp { drv = packages.gnb; };
         apps.perdiff  = flake-utils.lib.mkApp { drv = packages.perdiff; };
         apps.porthogs = flake-utils.lib.mkApp { drv = packages.porthogs; };
         apps.take     = flake-utils.lib.mkApp { drv = packages.take; };
