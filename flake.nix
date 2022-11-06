@@ -36,11 +36,11 @@
           };
         };
 
-        defaultPackage = packages.gnb;
+        packages.default = packages.gnb;
 
         apps.gnb = flake-utils.lib.mkApp { drv = packages.gnb; };
 
-        defaultApp = apps.gnb;
+        apps.default = apps.gnb;
       }
     );
 }
