@@ -50,8 +50,6 @@
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.git
-            pkgs.tcl
-            pkgs.tcllib
           ];
         };
       }
