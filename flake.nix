@@ -33,7 +33,7 @@
             '';
           };
       in rec {
-        packages.gnb = (simpleTcl {
+        packages.gnb = {} (simpleTcl {
           pkgs = pkgs;
           name = "gnb";
           version = "0.2.0";
