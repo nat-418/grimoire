@@ -19,7 +19,7 @@
               sha256 = sha256;
             };
 
-            buildInputs = [ pkgs.tcl ] ++ deps;
+            runtimeDependencies = [ pkgs.tcl ] ++ deps;
 
             dontUnpack    = true;
             dontBuild     = true;
