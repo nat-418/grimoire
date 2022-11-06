@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url     = "github:nixos/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
-    custom = {
   };
 
   outputs = { self, nixpkgs, flake-utils, simpleTcl }:
@@ -33,7 +32,7 @@
             '';
           };
       in rec {
-        packages.gnb = {} (simpleTcl {
+        packages.gnb = (simpleTcl {
           pkgs = pkgs;
           name = "gnb";
           version = "0.2.0";
