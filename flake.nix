@@ -11,8 +11,9 @@
       let pkgs = nixpkgs.legacyPackages.${system};
       in let tclScript = { name, version, description, url, sha256, deps }:
           pkgs.stdenv.mkDerivation {
-            pname   = name;
-            version = version;
+            pname       = name;
+            version     = version;
+            description = description;
 
             src = pkgs.fetchurl {
               url    = url;
