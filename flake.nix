@@ -8,20 +8,20 @@
 
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem(system:
-      let pkgs = nixpkgs.legacyPackages.${system};
+      let nixpkgs = nixpkgs.legacyPackages.${system};
       in rec {
-        packages.gnb = pkgs.stdenv.mkDerivation {
+        packages.gnb = nixpkgs.stdenv.mkDerivation {
           pname   = "gnb";
           version = "0.2.0";
 
-          src = pkgs.fetchurl {
+          src = nixpkgs.fetchurl {
             url    = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/gnb.tcl";
             sha256 = "6957bad55a73645297d1b5032ed8638c3f8641648d5efd47afccd9664834c8aa";
           };
 
           buildInputs = [
-            pkgs.git
-            pkgs.tcl
+            nixpkgs.git
+            nixpkgs.tcl
           ];
 
           dontUnpack    = true;
