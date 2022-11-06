@@ -8,9 +8,8 @@
 
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem(system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        tclScript = { pkgs, name, version, description, url, sha256, deps }:
+      let pkgs = nixpkgs.legacyPackages.${system};
+      in let tclScript = { name, version, description, url, sha256, deps }:
           pkgs.stdenv.mkDerivation {
             pname   = name;
             version = version;
@@ -33,15 +32,12 @@
           };
       in rec {
         packages.gnb = (tclScript {
-          pkgs = pkgs;
-          name = "gnb";
-          version = "0.2.0";
+          name        = "gnb";
+          version     = "0.2.0";
           description = "A command-line git-powered notebook";
-          url = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/gnb.tcl";
-          sha256 = "6957bad55a73645297d1b5032ed8638c3f8641648d5efd47afccd9664834c8aa";
-          deps = [
-            pkgs.git
-          ];
+          url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/gnb.tcl";
+          sha256      = "6957bad55a73645297d1b5032ed8638c3f8641648d5efd47afccd9664834c8aa";
+          deps        = [ pkgs.git ];
         });
         packages.default = packages.gnb;
 
