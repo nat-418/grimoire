@@ -42,8 +42,24 @@
         packages.gnb = (tclScript {
           name        = "gnb";
           version     = "0.2.0";
-          description = "A command-line, git-powered notebook";
+          description = "A git-powered notebook";
           url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/gnb.tcl";
+          sha256      = "sha256-aVe61VpzZFKX0bUDLthjjD+GQWSNXv1Hr8zZZkg0yKo=";
+          deps        = [ pkgs.git ];
+        });
+        packages.perdiff = (tclScript {
+          name        = "perdiff";
+          version     = "0.1.0";
+          description = "A percent difference calculator";
+          url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/perdiff.tcl";
+          sha256      = "sha256-aVe61VpzZFKX0bUDLthjjD+GQWSNXv1Hr8zZZkg0yKo=";
+          deps        = [ pkgs.git ];
+        });
+        packages.porthogs = (tclScript {
+          name        = "porthogs";
+          version     = "1.1.0";
+          description = "Find which processes are hogging what ports";
+          url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/porthogs.tcl";
           sha256      = "sha256-aVe61VpzZFKX0bUDLthjjD+GQWSNXv1Hr8zZZkg0yKo=";
           deps        = [ pkgs.git ];
         });
@@ -57,8 +73,11 @@
         });
         packages.default = packages.gnb;
 
-        apps.gnb    = flake-utils.lib.mkApp { drv = packages.gnb; };
-        apps.dotctl = flake-utils.lib.mkApp { drv = packages.dotctl; };
+        apps.gnb      = flake-utils.lib.mkApp { drv = packages.gnb; };
+        apps.dotctl   = flake-utils.lib.mkApp { drv = packages.dotctl; };
+        apps.perdiff  = flake-utils.lib.mkApp { drv = packages.perdiff; };
+        apps.porthogs = flake-utils.lib.mkApp { drv = packages.porthogs; };
+        apps.take     = flake-utils.lib.mkApp { drv = packages.take; };
 
         devShells.default = pkgs.mkShell {
           buildInputs = [
