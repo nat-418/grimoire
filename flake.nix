@@ -52,16 +52,16 @@
           version     = "0.1.0";
           description = "A percent difference calculator";
           url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/perdiff.tcl";
-          sha256      = "sha256-aVe61VpzZFKX0bUDLthjjD+GQWSNXv1Hr8zZZkg0yKo=";
-          deps        = [ pkgs.git ];
+          sha256      = "sha256-la8r3kgmntDJwAq/Jfp3T64Qw3X+WObCU+BR8OP9wGI=";
+          deps        = [ pkgs.tcllib ];
         });
         packages.porthogs = (tclScript {
           name        = "porthogs";
           version     = "1.1.0";
           description = "Find which processes are hogging what ports";
           url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/porthogs.tcl";
-          sha256      = "sha256-aVe61VpzZFKX0bUDLthjjD+GQWSNXv1Hr8zZZkg0yKo=";
-          deps        = [ pkgs.git ];
+          sha256      = "sha256-+hjWFKm0KBy7qNVAjxTnLIBDlI0nYjFzvswqaZr09xI=";
+          deps        = [ pkgs.lsof ];
         });
         packages.take = (tclScript {
           name        = "take";
