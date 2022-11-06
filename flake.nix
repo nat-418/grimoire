@@ -59,7 +59,7 @@
         packages.porthogs = (tclScript {
           name        = "porthogs";
           version     = "1.1.0";
-          description = "Find which processes are hogging what ports";
+          description = "A tool to find and/or kill processes by port number";
           url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/porthogs.tcl";
           sha256      = "sha256-+hjWFKm0KBy7qNVAjxTnLIBDlI0nYjFzvswqaZr09xI=";
           deps        = [ pkgs.lsof ];
