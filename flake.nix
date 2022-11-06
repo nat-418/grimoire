@@ -1,10 +1,13 @@
 {
   description = "Package for the command-line git notebook.";
 
-  outputs = { self, nixpkgs }: {
+  inputs = { nixpkgs }: {
+    pkgs = import nixpkgs { system = "x86_64-linux"; };
+  };
+
+  outputs = { self, pkgs }: {
     packages.x86_64-linux.gnb = 
-      let pkgs = import nixpkgs { system = "x86_64-linux"; };
-      in pkgs.stdenv.mkDerivation {
+      pkgs.stdenv.mkDerivation {
         pname   = "gnb";
         version = "0.2.0";
 
