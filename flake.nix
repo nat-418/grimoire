@@ -10,7 +10,7 @@
     flake-utils.lib.eachDefaultSystem(system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        simpleTcl = { pkgs, name, version, description, url, sha256, deps }:
+        tclScript = { pkgs, name, version, description, url, sha256, deps }:
           pkgs.stdenv.mkDerivation {
             pname   = name;
             version = version;
@@ -20,7 +20,7 @@
               sha256 = sha256;
             };
 
-            buildInputs = deps;
+            buildInputs = [ pkgs.tcl ] ++ deps;
 
             dontUnpack    = true;
             dontBuild     = true;
@@ -32,7 +32,7 @@
             '';
           };
       in rec {
-        packages.gnb = (simpleTcl {
+        packages.gnb = (tclScript {
           pkgs = pkgs;
           name = "gnb";
           version = "0.2.0";
@@ -41,7 +41,6 @@
           sha256 = "6957bad55a73645297d1b5032ed8638c3f8641648d5efd47afccd9664834c8aa";
           deps = [
             pkgs.git
-            pkgs.tcl
           ];
         });
         packages.default = packages.gnb;
