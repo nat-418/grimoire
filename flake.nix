@@ -1,12 +1,14 @@
 {
-  description = "Package for the command-line git notebook.";
+  description = "Programs written by and for me";
 
   outputs = { self, nixpkgs }: {
-    packages.x86_64-linux.gnb = 
-      let pkgs = import nixpkgs { system = "x86_64-linux"; };
+    gnb = 
+      let pkgs = import nixpkgs {};
       in pkgs.stdenv.mkDerivation {
         pname   = "gnb";
         version = "0.2.0";
+        description = "A command-line git notebook";
+    
 
         src = pkgs.fetchurl {
           url    = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/gnb.tcl";
@@ -27,7 +29,5 @@
           install -m 755 $src $out/bin/gnb
         '';
       };
-
-    packages.x86_64-linux.default = self.packages.x86_64-linux.gnb;
   };
 }
