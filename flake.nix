@@ -8,20 +8,20 @@
 
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem(system:
-      let nixpkgs = nixpkgs.legacyPackages.${system};
+      let pkgs = nixpkgs.legacyPackages.${system};
       in rec {
-        packages.gnb = nixpkgs.stdenv.mkDerivation {
+        packages.gnb = pkgs.stdenv.mkDerivation {
           pname   = "gnb";
           version = "0.2.0";
 
-          src = nixpkgs.fetchurl {
+          src = pkgs.fetchurl {
             url    = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/gnb.tcl";
             sha256 = "6957bad55a73645297d1b5032ed8638c3f8641648d5efd47afccd9664834c8aa";
           };
 
           buildInputs = [
-            nixpkgs.git
-            nixpkgs.tcl
+            pkgs.git
+            pkgs.tcl
           ];
 
           dontUnpack    = true;
@@ -33,10 +33,16 @@
             install -m 755 $src $out/bin/gnb
           '';
         };
-        packages.default = packages.gnb;
 
         apps.gnb = flake-utils.lib.mkApp { drv = packages.gnb; };
-        apps.default = apps.gnb;
+
+        devShell = pkgs.mkShell {
+          buildInputs = [
+            pkgs.git
+            pkgs.tcl
+            pkgs.tcllib
+          ];
+        };
       }
     );
 }
