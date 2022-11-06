@@ -27,5 +27,7 @@
           install -m 755 $src $out/bin/gnb
         '';
       };
+
+    packages.x86_64-linux.default = self.packages.x86_64-linux.gnb;
   };
 }
