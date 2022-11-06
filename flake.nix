@@ -4,29 +4,30 @@
   inputs = {
     nixpkgs.url     = "github:nixos/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
-  };
+    custom = {
+      simpleTcl = { pkgs, name, version, description, url, sha256, deps }:
+        pkgs.stdenv.mkDerivation {
+          pname   = name;
+          version = version;
 
-  simpleTcl = { pkgs, name, version, description, url, sha256, deps }:
-    pkgs.stdenv.mkDerivation {
-      pname   = name;
-      version = version;
+          src = pkgs.fetchurl {
+            url    = url;
+            sha256 = sha256;
+          };
 
-      src = pkgs.fetchurl {
-        url    = url;
-        sha256 = sha256;
-      };
+          buildInputs = deps;
 
-      buildInputs = deps;
+          dontUnpack    = true;
+          dontBuild     = true;
+          dontConfigure = true;
 
-      dontUnpack    = true;
-      dontBuild     = true;
-      dontConfigure = true;
-
-      installPhase = ''
-        mkdir -pv $out/bin
-        install -m 755 $src $out/bin/${name}
-      '';
+          installPhase = ''
+            mkdir -pv $out/bin
+            install -m 755 $src $out/bin/${name}
+          '';
+        };
     };
+  };
 
   outputs = { self, nixpkgs, flake-utils, simpleTcl }:
     flake-utils.lib.eachDefaultSystem(system:
