@@ -2,7 +2,7 @@
   description = "Programs written by and for me";
 
   outputs = { self, nixpkgs }: {
-    gnb = nixpkgs.stdenv.mkDerivation {
+    packages.x86_64-linux.gnb = nixpkgs.stdenv.mkDerivation {
         pname   = "gnb";
         version = "0.2.0";
         description = "A command-line git notebook";
