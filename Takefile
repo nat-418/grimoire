@@ -24,7 +24,6 @@ test {
 ci {
     lint
     test
-    build-packages
 }
 
 default {
