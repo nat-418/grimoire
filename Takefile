@@ -21,12 +21,6 @@ test {
     source ./tests/all.tcl
 }
 
-build-packages {
-    if {[catch which nix-build]} {
-        nix-build --no-out-link
-    }
-}
-
 ci {
     lint
     test
