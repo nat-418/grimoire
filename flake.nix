@@ -33,7 +33,7 @@
             '';
           };
       in rec {
-        packages.gnb = simpleTcl({
+        packages.gnb = simpleTcl {
           pkgs = pkgs;
           name = "gnb";
           version = "0.2.0";
@@ -44,7 +44,7 @@
             pkgs.git
             pkgs.tcl
           ];
-        });
+        } ;
         packages.default = packages.gnb;
 
         apps.gnb = flake-utils.lib.mkApp { drv = packages.gnb; };
