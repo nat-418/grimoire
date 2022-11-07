@@ -84,9 +84,8 @@ nc	1222	11899	killed
 ```
 
 ### take 🥡
-A simple task-runner. Tasks are specified in a Takefile using standard
-Tcl syntax extended to support system commands (e.g., `ls`) and running
-other tasks.
+A simple Tcl task-runner. Tasks are specified in a Takefile using standard
+Tcl syntax. Tasks can call each other, e.g., `take task`.
 
 #### Requirements
 - Tcl v8.6+
@@ -107,9 +106,7 @@ test {
 }
 
 default {
-    test
-    ls
-    puts "Eureka!"
+    take test
 }
 ```
 

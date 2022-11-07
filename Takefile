@@ -1,3 +1,4 @@
+##nagelfar ignore Unknown command
 install {
     set arguments [lrange $::argv 1 end]
     set files [glob ./src/*]
@@ -9,25 +10,36 @@ install {
     }
 }
 
+##nagelfar ignore Unknown command
 lint {
     foreach file [glob ./src/*] {
         puts [exec nagelfar $file]
     }
 }
 
+##nagelfar ignore Unknown command
 test {
     set argv ""
     set argc 0
     source ./tests/all.tcl
 }
 
+##nagelfar ignore Unknown command
 ci {
-    lint
-    test
-    exec nix flake check
+    take lint
+    take test
+    try {
+        exec nix flake check
+    } on error {error_message} {
+        puts stderr $error_message
+        if {![lsearch $error_message warning]} {
+            exit 1
+        }
+    }
 }
 
+##nagelfar ignore Unknown command
 default {
-    lint
-    test
+    take lint
+    take test
 }
