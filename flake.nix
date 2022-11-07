@@ -1,5 +1,5 @@
 {
-  description = "Package for the command-line git notebook.";
+  description = "Personal program repository";
 
   inputs = {
     nixpkgs.url     = "github:nixos/nixpkgs";
