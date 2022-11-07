@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.0.0](https://github.com/nat-418/grimoire/compare/v1.1.0...v2.0.0) (2022-11-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* update experimental flake
+
+### Features
+
+* add experimental flake ([58810b5](https://github.com/nat-418/grimoire/commit/58810b5eaf93d55af0e19d55f4ab25bcba619a95))
+
+
+### Bug Fixes
+
+* **take:** improve flag handling ([977bc5c](https://github.com/nat-418/grimoire/commit/977bc5c35e6dd51b5b18e8a284278d27051e1f48))
+
+
+### Build System
+
+* update experimental flake ([874c737](https://github.com/nat-418/grimoire/commit/874c737bc43ef4f8f1550fad33cedb4f2fe4b346))
+
 ## [1.1.0](https://github.com/nat-418/grimoire/compare/v1.0.0...v1.1.0) (2022-11-01)
 
 
