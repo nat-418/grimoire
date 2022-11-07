@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0](https://github.com/nat-418/grimoire/compare/v2.0.0...v3.0.0) (2022-11-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* **take:** bump to version 1.0.0
+* **take:** remove arbitrary system command support
+
+### Bug Fixes
+
+* **take:** bump to version 1.0.0 ([65ea792](https://github.com/nat-418/grimoire/commit/65ea79243eb2cd0b154e0d1940acb39fade5f557))
+* **take:** remove arbitrary system command support ([fec6212](https://github.com/nat-418/grimoire/commit/fec621255e4f05059020c29b006e1d1e319fe450))
+
 ## [2.0.0](https://github.com/nat-418/grimoire/compare/v1.1.0...v2.0.0) (2022-11-07)
 
 
