@@ -9,18 +9,19 @@
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem(system:
       let pkgs = nixpkgs.legacyPackages.${system};
-      in let tclScript = { name, version, description, url, sha256, deps }:
+      in let tclScript = { name, version, description, dependencies }:
           pkgs.stdenv.mkDerivation {
             pname       = name;
             version     = version;
             meta.description = description;
 
-            src = pkgs.fetchurl {
-              url    = url;
-              sha256 = sha256;
+            src = pkgs.fetchgit {
+              url         = "https://github.com/nat-418/grimoire";
+              rev         = "fd07109de875b0aec8e53e27bd4b96e6c599f63c";
+              sha256      = "sha256-jk02G8fUBr4D04H7k03J+lDg+B/Bww9KNeF/Tp7MMOA=";
             };
 
-            runtimeDependencies = [ pkgs.tcl ] ++ deps;
+            runtimeDependencies = [ pkgs.tcl ] ++ dependencies;
 
             dontUnpack    = true;
             dontBuild     = true;
@@ -28,49 +29,39 @@
 
             installPhase = ''
               mkdir -pv $out/bin
-              install -m 755 $src $out/bin/${name}
+              install -m 755 $src/src/${name}.tcl $out/bin/${name}
             '';
           };
       in rec {
         packages.dotctl = (tclScript {
-          name        = "dotctl";
-          version     = "0.1.0";
-          description = "A git wrapper for managing dotfiles in a bare repository";
-          url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/dotctl.tcl";
-          sha256      = "sha256-ezf6wU4wjau5VcP48tvoM+P2lKcXMolhwnjyr90LFaw=";
-          deps        = [ pkgs.git ];
+          name         = "dotctl";
+          version      = "0.1.0";
+          description  = "A git wrapper for managing dotfiles in a bare repository";
+          dependencies = [ pkgs.git ];
         });
         packages.gnb = (tclScript {
-          name        = "gnb";
-          version     = "0.2.0";
-          description = "A git-powered notebook";
-          url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/gnb.tcl";
-          sha256      = "sha256-aVe61VpzZFKX0bUDLthjjD+GQWSNXv1Hr8zZZkg0yKo=";
-          deps        = [ pkgs.git ];
+          name         = "gnb";
+          version      = "0.2.0";
+          description  = "A git-powered notebook";
+          dependencies = [ pkgs.git ];
         });
         packages.perdiff = (tclScript {
-          name        = "perdiff";
-          version     = "0.1.0";
-          description = "A percent difference calculator";
-          url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/perdiff.tcl";
-          sha256      = "sha256-la8r3kgmntDJwAq/Jfp3T64Qw3X+WObCU+BR8OP9wGI=";
-          deps        = [ pkgs.tcllib ];
+          name         = "perdiff";
+          version      = "0.1.0";
+          description  = "A percent difference calculator";
+          dependencies = [ pkgs.tcllib ];
         });
         packages.porthogs = (tclScript {
-          name        = "porthogs";
-          version     = "1.1.0";
-          description = "A tool to find and/or kill processes by port number";
-          url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/porthogs.tcl";
-          sha256      = "sha256-+hjWFKm0KBy7qNVAjxTnLIBDlI0nYjFzvswqaZr09xI=";
-          deps        = [ pkgs.lsof ];
+          name         = "porthogs";
+          version      = "1.1.0";
+          description  = "A tool to find and/or kill processes by port number";
+          dependencies = [ pkgs.lsof ];
         });
         packages.take = (tclScript {
-          name        = "take";
-          version     = "0.1.1";
-          description = "A simple task-runner";
-          url         = "https://raw.githubusercontent.com/nat-418/grimoire/main/src/take.tcl";
-          sha256      = "sha256-YAA1rsII5XnwwCg9KFCbhyUYe31odDGZgEu6H3SQBF8=";
-          deps        = [];
+          name         = "take";
+          version      = "0.1.1";
+          description  = "A simple task-runner";
+          dependencies = [];
         });
 
         apps.dotctl   = flake-utils.lib.mkApp { drv = packages.dotctl; };
