@@ -60,15 +60,14 @@ ifopt list l {
     exit 0
 }
 
-##nagelfar ignore
+##nagelfar ignore Found constant
 ifopt version v {
     global version
     puts stdout $version
     exit 0
 }
 
-# Extend Tcl so that Takefile task names and system commands can be run
-# without extra syntax.
+# Extend Tcl so that Takefile task names can be used without extra syntax.
 rename unknown original_unknown
 proc unknown args {
     global takefile_data original_unknown
@@ -77,11 +76,7 @@ proc unknown args {
         return [take $args]
     }
 
-    try {
-        return [puts [exec {*}$args]]
-    } on error _ {
-        return [uplevel 1 original_unknown $args]
-    }
+    return [uplevel 1 original_unknown $args]
 }
 
 take $argv

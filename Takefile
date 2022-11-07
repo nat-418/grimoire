@@ -24,6 +24,7 @@ test {
 ci {
     lint
     test
+    exec nix flake check
 }
 
 default {
