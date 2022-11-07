@@ -17,8 +17,8 @@
 
             src = pkgs.fetchgit {
               url         = "https://github.com/nat-418/grimoire";
-              rev         = "fd07109de875b0aec8e53e27bd4b96e6c599f63c";
-              sha256      = "sha256-jk02G8fUBr4D04H7k03J+lDg+B/Bww9KNeF/Tp7MMOA=";
+              rev         = "48efa36d15280b52dca1fa9241871b7916c910d5";
+              sha256      = "sha256-JUP4kdNSMKOq3y42KU94Mb2RmLR4f58H4gqUqU21fYE=";
             };
 
             runtimeDependencies = [ pkgs.tcl ] ++ dependencies;
@@ -59,8 +59,8 @@
         });
         packages.take = (tclScript {
           name         = "take";
-          version      = "0.1.1";
-          description  = "A simple task-runner";
+          version      = "1.0.0";
+          description  = "A simple Tcl task-runner";
           dependencies = [];
         });
 
