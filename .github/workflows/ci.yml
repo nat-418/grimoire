@@ -9,11 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Run CI suite defined in Takefile
-        uses: actions/checkout@v3
-      - run: sudo apt install -y tcllib
-      - run: wget https://sourceforge.net/projects/nagelfar/files/Rel_133/nagelfar133.linux.gz
-      - run: gunzip nagelfar133.linux.gz
-      - run: sudo chmod +x nagelfar133.linux
-      - run: sudo mv nagelfar133.linux /usr/local/bin/nagelfar
-      - run: tclsh ./src/take.tcl ci
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v22
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      - run: nix-build
+      - run: ./result/bin/knock --help
