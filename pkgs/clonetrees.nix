@@ -2,13 +2,13 @@
 
 tcl.mkTclDerivation rec {
   pname = "clonetrees";
-  version = "0.0.1";
+  version = "0.0.3";
 
   src = fetchFromGitHub {
     owner = "nat-418";
     repo = pname;
     rev = "refs/tags/v${version}";
-    hash = "sha256-tqEnYu4oh3HtteorEPqeBtrW3GDub+7Mk5qBceH1H5M=";
+    hash = "sha256-8QG2lY1Pswk1sDK10w7ILQRmdxTXmkpAqsVvksQzH/c=";
   };
 
   buildInputs = [];
