@@ -1,4 +1,4 @@
-{ lib, tcl, git, fetchFromGitHub, makeWrapper }:
+{ lib, tcl, git, openssh, fetchFromGitHub, makeWrapper }:
 
 tcl.mkTclDerivation rec {
   pname = "clonetrees";
@@ -20,6 +20,7 @@ tcl.mkTclDerivation rec {
   postFixup = ''
     wrapProgram $out/bin/${pname} --set PATH ${lib.makeBinPath [
       git
+      openssh
     ]};
   '';
 
