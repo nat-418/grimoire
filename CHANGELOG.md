@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.0.0](https://github.com/nat-418/grimoire/compare/v2.0.0...v3.0.0) (2024-04-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* **take:** bump to version 1.0.0
+* **take:** remove arbitrary system command support
+
+### Features
+
+* add clonetrees pkg ([48ce06a](https://github.com/nat-418/grimoire/commit/48ce06ae010009b980677eaece34bb937defdd3c))
+* add hogs package ([c497378](https://github.com/nat-418/grimoire/commit/c497378864b68d04da898d06d62f16eea2c9120e))
+* add picolisp unstable ([4da2864](https://github.com/nat-418/grimoire/commit/4da2864c40a4758c0331207428e31b562ebb8b58))
+* migrate from flakes to channel ([928e0b5](https://github.com/nat-418/grimoire/commit/928e0b568400e50a94aafac70e18635f1c3cfe56))
+
+
+### Bug Fixes
+
+* add ssh to clonetrees pkg ([8a0cb2f](https://github.com/nat-418/grimoire/commit/8a0cb2f835e50a1c3de9486da15fbb51096dee49))
+* **picolisp:** add manpages ([5042aa7](https://github.com/nat-418/grimoire/commit/5042aa7ba2cee7c40b570e6862e45d900acd8d76))
+* **take:** bump to version 1.0.0 ([48efa36](https://github.com/nat-418/grimoire/commit/48efa36d15280b52dca1fa9241871b7916c910d5))
+* **take:** remove arbitrary system command support ([fec6212](https://github.com/nat-418/grimoire/commit/fec621255e4f05059020c29b006e1d1e319fe450))
+
 ## [2.0.0](https://github.com/nat-418/grimoire/compare/v1.1.0...v2.0.0) (2022-11-07)
 
 
