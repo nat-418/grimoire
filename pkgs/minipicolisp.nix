@@ -1,43 +1,37 @@
-{
-  fetchgit,
-  lib,
-  stdenv,
-  writeScriptBin
-}:
+{ lib, stdenv, gcc, gnumake, fetchgit }:
+
+let
+  crazyStr = (lib.strings.escapeShellArg "\${0%/*}");
+in
 
 stdenv.mkDerivation rec {
   pname = "MiniPicoLisp";
-  version = "2018-09-30";
-  src = fetchgit {
-    url = "https://github.com/nat-418/miniPicoLisp";
+  version = "2024-04-12";
+   src = fetchgit {
+    url = "https://github.com/nat-418/MiniPicoLisp";
     rev = version;
-    sha256 = "sha256-NwZX3mJIQ8hUm5M2P7vE97W1+x8cykw5e6oXQn84Ivs=";
+    sha256 = "sha256-6uqXPgF43cj/RfN5ti7PoAwUZUUCnN+Z3A53+ANTPc8=";
   };
 
-  nativeBuildInputs = [ ];
-  buildInputs = [ ];
+  nativeBuildInputs = [ gcc gnumake ];
+
   buildPhase = ''
+    rm *.nix
     cd src
     make
+    cd ..
   '';
 
   installPhase = ''
-    cd ..
-    mkdir -p "$out/lib" "$out/bin" 
-    cp -r . "$out/lib/minipicolisp/"
-    ln -s "$out/lib/minipicolisp/bin/picolisp" "$out/bin/minipicolisp"
-    cat <<EOF > mpil
-    exec $out/bin/minipicolisp $out/lib/minipicolisp/lib.l @lib/misc.l "\$@"
-    EOF
-    install mpil "$out/bin/mpil"
+    mkdir -p "$out"
+    cp -r . "$out"
+    ln -s "$out/mpil" "$out/bin/mpil"
+    substituteInPlace $out/bin/mpil --replace ${crazyStr} $out
   '';
 
-  meta = with lib; {
-    description = "An embeddable, 'pure' PicoLisp.";
-    homepage = "https://picolisp.com/";
-    license = licenses.mit;
-    maintainers = with maintainers; [ nat-418 ];
-    platforms = platforms.all;
+  meta = {
+    description = ''An embeddable, "pure" PicoLisp interpreter.'';
+    homepage = "https://www.picolisp.com/wiki/?embedded";
   };
 }
 
