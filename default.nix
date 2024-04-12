@@ -5,4 +5,5 @@
   hogs = pkgs.callPackage ./pkgs/hogs.nix {};
   knock = pkgs.callPackage ./pkgs/knock.nix {};
   picolisp = pkgs.callPackage ./pkgs/picolisp.nix {};
+  minipicolisp = pkgs.callPackage ./pkgs/minipicolisp.nix {};
 }
