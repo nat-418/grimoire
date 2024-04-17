@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.1.0](https://github.com/nat-418/grimoire/compare/v3.0.0...v3.1.0) (2024-04-17)
+
+
+### Features
+
+* **lmt:** init at version 0.0.0 ([eb1073c](https://github.com/nat-418/grimoire/commit/eb1073c3a78f4d2bba4520e4be4ff33ac58a7701))
+* **micropicolisp:** init at 2018-09-30 ([e81b180](https://github.com/nat-418/grimoire/commit/e81b180988ddb6e8ddca8cc16531e9e70fc8440d))
+
+
+### Bug Fixes
+
+* **picolisp:** add missing executables ([4535b6f](https://github.com/nat-418/grimoire/commit/4535b6f25ab29ec0a24a4367640ecd858efc1665))
+* **picolisp:** update URL etc. ([1c637ed](https://github.com/nat-418/grimoire/commit/1c637ed499735de3f82e3736050e5a64a54339a1))
+
 ## [3.0.0](https://github.com/nat-418/grimoire/compare/v2.0.0...v3.0.0) (2024-04-11)
 
 
