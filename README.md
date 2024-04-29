@@ -66,7 +66,7 @@ Knock is open source-software distributed under the 0BSD license.
 To report bugs or view source code, see https://codeberg.org/nat-418/knock.
 
 
-[download a pre-built binary]: https://github.com/nat-418/knock/releases/latest
+[download a pre-built binary]: https://codeberg.org/nat-418/knock/releases/latest
 [Conventional Commits 1.0.0]: https://flat.badgen.net/badge/Conventional%20Commits/1.0.0/
 [Semantic Versioning 2.0.0]:  https://flat.badgen.net/badge/Semantic%20Versioning/2.0.0/
 
